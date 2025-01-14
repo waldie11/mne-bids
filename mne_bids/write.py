@@ -703,8 +703,13 @@ def _scans_tsv(raw, raw_fname, fname, keep_source, overwrite=False):
 
     if os.path.exists(fname):
         orig_data = _from_tsv(fname)
-        # if the file name is already in the file raise an error
-        if raw_fname in orig_data["filename"] and not overwrite:
+        # whether the new data exists identically in the previous data
+        exact_included = _contains_row(data=orig_data, row_data=data)
+        # whether the raw filename is in the previous data
+        fname_included = raw_fname in orig_data["filename"]
+        # if the scans data provided is different to the currently existing data
+        # and overwrite is not True raise an error
+        if (fname_included and not exact_included) and not overwrite:
             raise FileExistsError(
                 f'"{raw_fname}" already exists in '
                 f"the scans list. Please set "
