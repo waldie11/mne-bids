@@ -261,6 +261,21 @@ def test_path_benchmark(tmp_path_factory):
         > 0.5 * timed_entity_match
     )
 
+    # This should yield the same performance gain, it is not.
+    # # apply include_match on get_entity_vals with root level bids directory should
+    # # yield a performance boost of order of length from bids_subdirectories.
+    # timed_entity_ignore = timeit.timeit(
+    #     "mne_bids.get_entity_vals(tmp_bids_root, 'session', ignore_dirs=['derivatives', 'sourcedata'])",  # noqa: E501
+    #     setup="import mne_bids\ntmp_bids_root='" + str(tmp_bids_root) + "'",
+    #     number=1,
+    # )
+
+    # assert (
+    #     timed_entity / (10 * np.maximum(1, np.floor(len(bids_subdirectories) / 10)))
+    #     # while this should be of same order, lets give it some space by a factor of 2
+    #     > 0.5 * timed_entity_ignore
+    # )
+
     # Clean up
     shutil.rmtree(tmp_bids_root)
 
