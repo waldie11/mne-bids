@@ -222,12 +222,12 @@ def test_path_benchmark(tmp_path_factory):
     timed_all, timed_ignored_nosub = (
         timeit.timeit(
             "mne_bids.find_matching_paths(tmp_bids_root)",
-            setup="import mne_bids\ntmp_bids_root='" + str(tmp_bids_root) + "'",
+            setup="import mne_bids\ntmp_bids_root=r'" + str(tmp_bids_root) + "'",
             number=1,
         ),
         timeit.timeit(
             "mne_bids.find_matching_paths(tmp_bids_root, ignore_nosub=True)",
-            setup="import mne_bids\ntmp_bids_root='" + str(tmp_bids_root) + "'",
+            setup="import mne_bids\ntmp_bids_root=r'" + str(tmp_bids_root) + "'",
             number=10,
         )
         / 10,
@@ -244,12 +244,12 @@ def test_path_benchmark(tmp_path_factory):
     timed_entity, timed_entity_match = (
         timeit.timeit(
             "mne_bids.get_entity_vals(tmp_bids_root, 'session')",
-            setup="import mne_bids\ntmp_bids_root='" + str(tmp_bids_root) + "'",
+            setup="import mne_bids\ntmp_bids_root=r'" + str(tmp_bids_root) + "'",
             number=1,
         ),
         timeit.timeit(
             "mne_bids.get_entity_vals(tmp_bids_root, 'session', include_match='sub-*/')",  # noqa: E501
-            setup="import mne_bids\ntmp_bids_root='" + str(tmp_bids_root) + "'",
+            setup="import mne_bids\ntmp_bids_root=r'" + str(tmp_bids_root) + "'",
             number=10,
         )
         / 10,
@@ -266,7 +266,7 @@ def test_path_benchmark(tmp_path_factory):
     # # yield a performance boost of order of length from bids_subdirectories.
     # timed_entity_ignore = timeit.timeit(
     #     "mne_bids.get_entity_vals(tmp_bids_root, 'session', ignore_dirs=['derivatives', 'sourcedata'])",  # noqa: E501
-    #     setup="import mne_bids\ntmp_bids_root='" + str(tmp_bids_root) + "'",
+    #     setup="import mne_bids\ntmp_bids_root=r'" + str(tmp_bids_root) + "'",
     #     number=1,
     # )
 
